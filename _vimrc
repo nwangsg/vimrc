@@ -42,5 +42,16 @@ set hlsearch      " highlight search terms set incsearch     " show search match
 set synmaxcol=128
 syntax sync minlines=256
 
+" NERDTree script
+nnoremap <C-n> :NERDTreeToggle<CR>
+
 " Key Bindings
-nnoremap <Space> :
+
+" Custom Commands 
+let mapleader = "\<Space>"
+nnoremap <Leader>w :w<CR>;
+nnoremap <Leader>q :q<CR>;
+nnoremap <Leader>o :o<CR>;
+nnoremap <Leader>wq :wq<CR>;
+nnoremap <Leader>rc :e $MYVIMRC<CR>;
+nnoremap <Leader>q! :q!<CR>;
