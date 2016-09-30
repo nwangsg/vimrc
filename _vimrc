@@ -49,9 +49,15 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 " Custom Commands 
 let mapleader = "\<Space>"
-nnoremap <Leader>w :w<CR>;
-nnoremap <Leader>q :q<CR>;
-nnoremap <Leader>o :o<CR>;
-nnoremap <Leader>wq :wq<CR>;
-nnoremap <Leader>rc :e $MYVIMRC<CR>;
-nnoremap <Leader>q! :q!<CR>;
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>o :o<CR>
+nnoremap <Leader>wq :wq<CR>
+nnoremap <Leader>q! :q!<CR>
+nnoremap <Leader>rc :e $MYVIMRC<CR>
+nnoremap <Leader>rl :so $MYVIMRC<CR>  " reload vimrc
+
+" For YCM
+nnoremap <Leader>gd :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
+
