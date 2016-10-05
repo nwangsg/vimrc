@@ -1,16 +1,18 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required" set the runtime path to include Vundle and initialize
 
+" work dir
 set rtp+=~/vimfiles/bundle/Vundle.vim
 call vundle#begin('D:/Application/VimPlugins/')
-"alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+
+" home dir
+" set rtp+=E:/workspace/Vundle.vim
+" call vundle#begin('E:/workspace/vimbundles/')
 
 " Vundle Plugin List 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'leafgarland/typescript-vim' 
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
