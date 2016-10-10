@@ -33,6 +33,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " syntax on
 " set synmaxcol=128
 " syntax sync minlines=256
+set encoding=utf-8
 syntax off
 set number        " always show line numbers 
 set cursorline    " highlight line where cursor is on
@@ -49,6 +50,7 @@ set ignorecase    " ignore case when searching
 set smartcase     " ignore case if search pattern is all lowercase,                     "    case-sensitive otherwise 
 set smarttab      " insert tabs on the start of a line according to                     "    shiftwidth, not tabstop 
 set hlsearch      " highlight search terms set incsearch     " show search matches as you type
+set splitright    " split on the right
 
 " Custom Bindings 
 let mapleader = "\<Space>"
@@ -79,9 +81,11 @@ let g:NERDTrimTrailingWhitespace = 1   " Enable trimming of trailing whitespace 
 
 " YCM
 nnoremap <Leader>gd :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>gc :YcmCompleter GoToDeclaration<CR>
 nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <Leader>g :YcmCompleter GoTo<CR>
 
-" CtrlP 
+" ctrlp 
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_extensions = ['buffertag','tag','line','dir']
 let g:ctrlp_custom_ignore = {
@@ -89,8 +93,19 @@ let g:ctrlp_custom_ignore = {
 			\'file': '\v\.(exe|dll|swp|zip|tmp)$'
 			\}
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Vim-airline 
 let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
 
+" Vim-airline-theme
 
