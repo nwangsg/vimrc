@@ -9,17 +9,20 @@ call vundle#begin('D:/Application/VimPlugins/')
 " set rtp+=E:/workspace/Vundle.vim
 " call vundle#begin('E:/workspace/vimbundles/')
 
-" Vundle Plugin List 
+" Vundle Plugin List
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
-Plugin 'leafgarland/typescript-vim' 
+Plugin 'leafgarland/typescript-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'majutsushi/tagbar'
+Plugin 'skwp/greplace.vim'
+Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -27,32 +30,32 @@ filetype plugin indent on    " required
 
 
 " Vim Settings
-autocmd StdinReadPre * let s:std_in=1 
+autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " syntax causes lag sometimes, turn on according to computer performance
 " syntax on
 " set synmaxcol=128
 " syntax sync minlines=256
 set encoding=utf-8
-syntax off
-set number        " always show line numbers 
+syntax on
+set number        " always show line numbers
 set cursorline    " highlight line where cursor is on
 set ruler         " show line and character number at bottom right
-set nowrap        " don't wrap lines 
-set tabstop=4     " a tab is 4 spaces 
-set backspace=indent,eol,start                     " allow backspacing over everything in insert mode 
-set autoindent    " always set autoindenting on 
-set copyindent    " copy the previous indentation on autoindenting 
-set shiftwidth=4  " number of spaces to use for autoindenting 
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>' 
-set showmatch     " set show matching parenthesis 
-set ignorecase    " ignore case when searching 
-set smartcase     " ignore case if search pattern is all lowercase,                     "    case-sensitive otherwise 
-set smarttab      " insert tabs on the start of a line according to                     "    shiftwidth, not tabstop 
+set nowrap        " don't wrap lines
+set tabstop=4     " a tab is 4 spaces
+set backspace=indent,eol,start                     " allow backspacing over everything in insert mode
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
+set shiftwidth=4  " number of spaces to use for autoindenting
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set showmatch     " set show matching parenthesis
+set ignorecase    " ignore case when searching
+set smartcase     " ignore case if search pattern is all lowercase,                     "    case-sensitive otherwise
+set smarttab      " insert tabs on the start of a line according to                     "    shiftwidth, not tabstop
 set hlsearch      " highlight search terms set incsearch     " show search matches as you type
 set splitright    " split on the right
 
-" Custom Bindings 
+" Custom Bindings
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
@@ -64,9 +67,15 @@ nnoremap <Leader>rl :so $MYVIMRC<CR>  " reload vimrc
 "<leader>ri to reindent
 nnoremap <Leader>ri ggvG=
 nnoremap <Leader>pu :!git pull<CR>
+nnoremap <Leader>on :on<CR>
+
+" autocmd
+:nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+autocmd BufWritePre *.pl %s/\s\+$//e
 
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR><CR>
+let g:NERDTreeWinSize=45
 
 " NERDCommenter
 " Default toggle command <leader>c<Space>
@@ -85,7 +94,7 @@ nnoremap <Leader>gc :YcmCompleter GoToDeclaration<CR>
 nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <Leader>g :YcmCompleter GoTo<CR>
 
-" ctrlp 
+" ctrlp
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_extensions = ['buffertag','tag','line','dir']
 let g:ctrlp_custom_ignore = {
@@ -102,10 +111,33 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_typescript_checkers=['tslint']
 
-" Vim-airline 
+" Vim-airline
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline_powerline_fonts = 1
 
-" Vim-airline-theme
+" Tagbar
+let g:tagbar_type_typescript = {
+			\ 'ctagstype': 'typescript',
+			\ 'kinds': [
+			\ 'c:classes',
+			\ 'n:modules',
+			\ 'f:functions',
+			\ 'v:variables',
+			\ 'v:varlambdas',
+			\ 'm:members',
+			\ 'i:interfaces',
+			\ 'e:enums',
+			\ ]
+			\ }
+
+nmap <F8> :TagbarToggle<CR>
+
+" EasyMotion
+let g:EasyMotion_do_mapping = 0		" Disable default mappings
+nmap s <Plug>(easymotion-overwin-f2)
+let g:EasyMotion_smartcase = 1 		" Turn on case insensitive feature
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
