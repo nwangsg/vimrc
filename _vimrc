@@ -23,6 +23,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
 Plugin 'skwp/greplace.vim'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'mhinz/vim-signify'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -54,6 +55,7 @@ set smartcase     " ignore case if search pattern is all lowercase,             
 set smarttab      " insert tabs on the start of a line according to                     "    shiftwidth, not tabstop
 set hlsearch      " highlight search terms set incsearch     " show search matches as you type
 set splitright    " split on the right
+set updatetime =250 "set git update time to 250 ms, instead of default 4 sec
 
 " Custom Bindings
 let mapleader = "\<Space>"
@@ -88,13 +90,23 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }  " Add you
 let g:NERDCommentEmptyLines = 1   " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDTrimTrailingWhitespace = 1   " Enable trimming of trailing whitespace when uncommenting
 
+" Fugitive
+nnoremap <Leader>ga	:Git add %:p<CR><CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit -v -q<CR>
+nnoremap <Leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <Leader>gdi :Gdiff<CR>
+nnoremap <Leader>ge :Gedit<CR>
+nnoremap <Leader>gv	:Gvsplit<CR>
+nnoremap <Leader>gp	:Gpush<CR>
+set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
+
 " YCM
 nnoremap <Leader>gd :YcmCompleter GoToDefinition<CR>
-nnoremap <Leader>gc :YcmCompleter GoToDeclaration<CR>
 nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <Leader>g :YcmCompleter GoTo<CR>
 
-" ctrlp
+" CtrlP
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_extensions = ['buffertag','tag','line','dir']
 let g:ctrlp_custom_ignore = {
@@ -113,7 +125,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_typescript_checkers=['tslint']
 
-" Vim-airline
+" Vim-Airline
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline_powerline_fonts = 1
 
@@ -141,3 +153,5 @@ let g:EasyMotion_smartcase = 1 		" Turn on case insensitive feature
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
+" Vim signify
+let g:signify_vcs_list = ['git']
