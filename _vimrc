@@ -40,7 +40,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 set encoding=utf-8
 syntax on
 set number        " always show line numbers
-set autoread      " auto reload file
 set cursorline    " highlight line where cursor is on
 set ruler         " show line and character number at bottom right
 set nowrap        " don't wrap lines
@@ -156,4 +155,3 @@ map <Leader>k <Plug>(easymotion-k)
 
 " Vim signify
 let g:signify_vcs_list = ['git']
-let g:signify_update_on_focusgained = 1
